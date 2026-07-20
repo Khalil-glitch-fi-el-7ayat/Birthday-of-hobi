@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    
+    <!-- Importing a cleaner, modern font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    
+    <!-- Importing a lightweight Confetti library -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Glassmorphism card effect */
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 50px 40px;
+            border-radius: 24px;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            transform: translateY(0);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        h1 {
+            font-size: 3.5em;
+            margin: 0 0 15px 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            letter-spacing: 2px;
+        }
+
+        p {
+            font-size: 1.2em;
+            line-height: 1.7;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ff512f, #dd2476);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.2em;
+            font-weight: 600;
+            font-family: 'Poppins', sans-serif;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 15px rgba(221, 36, 118, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 20px rgba(221, 36, 118, 0.4);
+        }
+
+        .btn:active {
+            transform: scale(0.95);
+        }
+
+        .secret-wrapper {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+            margin-top: 0;
+        }
+
+        .secret-wrapper.show {
+            max-height: 300px;
+            opacity: 1;
+            margin-top: 30px;
+        }
+
+        .secret-message {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 25px;
+            border-radius: 12px;
+            border-left: 5px solid #ff512f;
+            font-style: italic;
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h1>Happy Birthday! 🎉</h1>
+        <p>To my absolute favorite person. I hope your day is filled with as much joy, laughter, and chaos as you bring into my life every single day.</p>
+        
+        <button class="btn" onclick="revealGift()" id="giftBtn">Unlock Your Gift</button>
+
+        <div class="secret-wrapper" id="secret-wrapper">
+            <div class="secret-message">
+                "Here is where you can write an inside joke, a heartfelt letter, or drop a link to a digital gift card. Have the best day ever!"
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function revealGift() {
+            const wrapper = document.getElementById('secret-wrapper');
+            const btn = document.getElementById('giftBtn');
+            
+            wrapper.classList.toggle('show');
+
+            if (wrapper.classList.contains('show')) {
+                btn.innerText = "Close Gift";
+                
+                confetti({
+                    particleCount: 150,
+                    spread: 80,
+                    origin: { y: 0.6 },
+                    colors: ['#26ccff', '#a25afd', '#ff5e7e', '#88ff5a', '#fcff42']
+                });
+            } else {
+                btn.innerText = "Unlock Your Gift";
+            }
+        }
+    </script>
+
+</body>
+</html>
